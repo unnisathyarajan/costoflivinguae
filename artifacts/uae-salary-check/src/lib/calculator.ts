@@ -1,4 +1,5 @@
 export type City = "Dubai" | "Abu Dhabi";
+export type AreaTier = "Premium" | "Mid-range / Family" | "Affordable / Value" | "Budget / Farther Out";
 export type FamilySize = "Solo" | "Couple" | "Family with 1 kid" | "Family with 2 kids" | "Family with 3 kids";
 export type RentPreference = "Shared room" | "Studio" | "1BR" | "2BR" | "3BR";
 export type CarOwnership = "No car (public transport)" | "Own a car";
@@ -7,6 +8,8 @@ export type LifestyleLevel = "Budget" | "Moderate" | "Comfortable" | "Luxury";
 
 export interface CalculatorInputs {
   city: City;
+  areaTier: AreaTier;
+  community: string;
   salary: number;
   familySize: FamilySize;
   rentPreference: RentPreference;
@@ -31,7 +34,75 @@ export interface CalculatorResults {
   tips: string[];
 }
 
-const RENT_DUBAI = {
+export const CITY_AREAS: Record<City, Record<AreaTier, string[]>> = {
+  Dubai: {
+    "Premium": [
+      "Palm Jumeirah",
+      "Dubai Marina",
+      "Downtown Dubai",
+      "DIFC",
+    ],
+    "Mid-range / Family": [
+      "JVC",
+      "Al Barsha",
+      "Mirdif",
+      "Arabian Ranches",
+    ],
+    "Affordable / Value": [
+      "Discovery Gardens",
+      "International City",
+      "Deira",
+      "Bur Dubai",
+    ],
+    "Budget / Farther Out": [
+      "Dubai South",
+      "Jebel Ali",
+      "Al Quoz",
+      "Sharjah Border",
+    ],
+  },
+  "Abu Dhabi": {
+    "Premium": [
+      "Al Reem Island",
+      "Saadiyat Island",
+      "Yas Island",
+      "Corniche",
+    ],
+    "Mid-range / Family": [
+      "Khalifa City",
+      "Al Raha",
+      "Al Reef",
+      "Tourist Club Area",
+    ],
+    "Affordable / Value": [
+      "MBZ City",
+      "Mussafah / Shabiya",
+      "Baniyas",
+      "Al Shamkha",
+    ],
+    "Budget / Farther Out": [
+      "Shahama",
+      "Al Wathba",
+      "Mafraq",
+    ],
+  },
+};
+
+export const AREA_TIERS: AreaTier[] = [
+  "Premium",
+  "Mid-range / Family",
+  "Affordable / Value",
+  "Budget / Farther Out",
+];
+
+const AREA_RENT_MULTIPLIER: Record<AreaTier, number> = {
+  "Premium": 1.45,
+  "Mid-range / Family": 1.0,
+  "Affordable / Value": 0.78,
+  "Budget / Farther Out": 0.60,
+};
+
+const RENT_DUBAI: Record<RentPreference, number> = {
   "Shared room": 1500,
   "Studio": 4500,
   "1BR": 7000,
@@ -39,7 +110,7 @@ const RENT_DUBAI = {
   "3BR": 15000,
 };
 
-const RENT_AD = {
+const RENT_AD: Record<RentPreference, number> = {
   "Shared room": 1200,
   "Studio": 3500,
   "1BR": 5500,
@@ -47,21 +118,21 @@ const RENT_AD = {
   "3BR": 12000,
 };
 
-const GROCERIES_PER_PERSON = {
+const GROCERIES_PER_PERSON: Record<LifestyleLevel, number> = {
   Budget: 500,
   Moderate: 800,
   Comfortable: 1200,
   Luxury: 2000,
 };
 
-const DINING = {
+const DINING: Record<LifestyleLevel, number> = {
   Budget: 200,
   Moderate: 500,
   Comfortable: 1000,
   Luxury: 2500,
 };
 
-const ENTERTAINMENT = {
+const ENTERTAINMENT: Record<LifestyleLevel, number> = {
   Budget: 200,
   Moderate: 500,
   Comfortable: 1000,
@@ -79,28 +150,22 @@ export function getFamilyMultiplier(size: FamilySize): number {
 }
 
 export function calculateExpenses(inputs: CalculatorInputs): CalculatorResults {
-  const { city, salary, familySize, rentPreference, carOwnership, schooling, lifestyle } = inputs;
-  
-  // 1. Rent
-  const rentDict = city === "Dubai" ? RENT_DUBAI : RENT_AD;
-  const rent = rentDict[rentPreference];
+  const { city, areaTier, salary, familySize, rentPreference, carOwnership, schooling, lifestyle } = inputs;
 
-  // 2. Groceries
+  const baseRentDict = city === "Dubai" ? RENT_DUBAI : RENT_AD;
+  const baseRent = baseRentDict[rentPreference];
+  const rent = Math.round(baseRent * AREA_RENT_MULTIPLIER[areaTier]);
+
   const peopleCount = getFamilyMultiplier(familySize);
   const groceries = GROCERIES_PER_PERSON[lifestyle] * peopleCount;
 
-  // 3. Dining
-  // Assuming dining scales partially with family size but we'll scale it for the whole unit for simplicity, or just use base
   const diningBase = DINING[lifestyle];
   const dining = peopleCount === 1 ? diningBase : diningBase * (peopleCount * 0.7);
 
-  // 4. Transport
   const transport = carOwnership === "Own a car" ? 900 : 200 * peopleCount;
 
-  // 5. Utilities
   const utilities = peopleCount === 1 ? 600 : 1000;
 
-  // 6. School Fees
   let schoolFees = 0;
   if (schooling === "Private school 1 kid") {
     schoolFees = city === "Dubai" ? 2500 : 2000;
@@ -108,13 +173,10 @@ export function calculateExpenses(inputs: CalculatorInputs): CalculatorResults {
     schoolFees = (city === "Dubai" ? 2500 : 2000) * 2;
   }
 
-  // 7. Entertainment
   const entertainment = ENTERTAINMENT[lifestyle] * (peopleCount === 1 ? 1 : peopleCount * 0.6);
 
-  // 8. Healthcare
   const healthcare = peopleCount === 1 ? 200 : 600;
 
-  // 9. Miscellaneous
   const miscellaneous = peopleCount === 1 ? 300 : 600;
 
   const breakdown: ExpenseBreakdown[] = [
@@ -148,17 +210,17 @@ export function calculateExpenses(inputs: CalculatorInputs): CalculatorResults {
 
   const tips: string[] = [];
   if (rent / salary > 0.4) {
-    tips.push("Your rent is more than 40% of your income. Consider a smaller place or a different area to reduce financial stress.");
+    tips.push("Your rent is more than 40% of your income. Consider a more affordable area or smaller apartment to reduce financial stress.");
   }
   if (carOwnership === "Own a car" && salary < 8000) {
-    tips.push("Owning a car on a salary below 8,000 AED can be tight. Consider the Metro to save up to 700 AED monthly.");
+    tips.push("Owning a car on a salary below 8,000 AED can be tight. Consider public transport to save up to 700 AED monthly.");
   }
   if (netSavings < 0) {
-    tips.push("Your expected expenses exceed your salary. You will need to downgrade your lifestyle or negotiate a higher offer.");
+    tips.push("Your expected expenses exceed your salary. Consider a different area tier, smaller apartment, or negotiate a higher offer.");
   } else if (savingsRate < 10) {
-    tips.push("Your savings rate is very low. Aim to save at least 20% by cutting back on dining or entertainment.");
+    tips.push("Your savings rate is very low. Aim for at least 20% by adjusting your area, dining, or entertainment spend.");
   } else {
-    tips.push(`Great job! You're projected to save ${savingsRate.toFixed(1)}% of your income.`);
+    tips.push(`You are projected to save ${savingsRate.toFixed(1)}% of your income — a solid position.`);
   }
 
   return {
@@ -169,6 +231,6 @@ export function calculateExpenses(inputs: CalculatorInputs): CalculatorResults {
     affordabilityScore,
     lifestyleCategory,
     estimatedAnnualSavings,
-    tips
+    tips,
   };
 }

@@ -3,8 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
-import { Calculator, Map, DollarSign, BookOpen, Menu, X } from "lucide-react";
+import { Calculator, Map, DollarSign, BookOpen, Menu, X, MapPin } from "lucide-react";
 import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // Placeholder for components until they are written
 import Home from "./pages/home";
@@ -31,11 +32,24 @@ function Layout({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-card/80 backdrop-blur">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold">
-              AE
+            <div className="w-8 h-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs">
+              UAE
             </div>
-            <span className="font-bold text-lg hidden sm:block">Can I Afford Dubai?</span>
+            <span className="font-bold text-lg hidden sm:block">Cost of Living UAE</span>
           </Link>
+
+          <div className="hidden md:flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-muted-foreground" />
+            <Select defaultValue="Dubai">
+              <SelectTrigger className="w-36 h-8 text-sm border-border">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Dubai">Dubai</SelectItem>
+                <SelectItem value="Abu Dhabi">Abu Dhabi</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => {
@@ -92,7 +106,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       
       <footer className="border-t border-border py-8 mt-auto bg-card">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p className="font-medium text-foreground mb-2">Can I Afford Dubai? &copy; {new Date().getFullYear()}</p>
+          <p className="font-medium text-foreground mb-2">Cost of Living UAE &copy; {new Date().getFullYear()}</p>
           <p>A practical guide for expats and professionals relocating to the UAE.</p>
         </div>
       </footer>

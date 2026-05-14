@@ -1,0 +1,315 @@
+You are a senior product architect, UX designer, SEO strategist, growth hacker, and senior frontend engineer.
+
+Your task is to design and build a production-ready modern web application called:
+
+"Can I Afford Dubai or AbuDhabi?" 
+(or suggest better names)
+
+This is a UAE-focused cost-of-living comparison and salary reality platform designed primarily for:
+- expats
+- job seekers
+- remote workers
+- Indians moving to UAE
+- families relocating
+- fresh graduates
+- people comparing Dubai vs Abu Dhabi vs Sharjah
+- people asking:
+  "Is AED X salary enough in Dubai?"
+
+The application should provide IMMENSE PRACTICAL VALUE using calculations, comparisons, projections, and realistic lifestyle simulations.
+
+The website must feel:
+- modern
+- fast
+- trustworthy
+- simple
+- mobile-friendly
+- emotionally relatable
+- highly shareable
+- SEO optimized
+
+====================================================
+CORE BUSINESS GOALS
+====================================================
+
+Primary goals:
+1. Get organic SEO traffic from Google
+2. Earn via Google AdSense
+3. Potential future affiliate revenue
+4. Build authority/trust
+5. Extremely low infrastructure cost
+6. Mostly frontend-rendered
+7. Can run on:
+   - GitHub Pages
+   - Cloudflare Pages
+   - Vercel free tier
+8. Avoid expensive backend infra
+9. Avoid complex authentication systems initially
+10. MVP first
+
+====================================================
+IMPORTANT CONSTRAINTS
+====================================================
+
+- Prefer static frontend architecture
+- Use browser-side calculations wherever possible
+- Database optional
+- No heavy backend initially
+- Minimal monthly maintenance
+- Low RAM/CPU usage
+- Data updates should be easy
+- Monthly manual updates acceptable
+- SEO pages should be prerenderable/static
+- Prefer JSON-based datasets
+
+====================================================
+TARGET USER PSYCHOLOGY
+====================================================
+
+The user is usually:
+- anxious about relocation
+- financially stressed
+- comparing opportunities
+- scared of high UAE cost of living
+- wondering if salary is enough
+- trying to save money
+- trying to invest
+- trying to support family
+- trying to escape paycheck-to-paycheck life
+
+The site should emotionally resonate with them.
+
+====================================================
+CORE FEATURES
+====================================================
+
+Design ALL of these features in detail:
+
+----------------------------------------------------
+1. SALARY SUFFICIENCY CALCULATOR
+----------------------------------------------------
+
+User enters:
+- city
+- salary
+- family size
+- rent style
+- car/no car
+- schooling
+- lifestyle level
+
+Then show:
+- monthly breakdown
+- expected savings
+- affordability score
+- stress score
+- lifestyle category:
+  - surviving
+  - comfortable
+  - luxury
+  - risky
+  - impossible
+
+Include realistic estimates:
+- rent
+- groceries
+- internet
+- fuel
+- school fees
+- transportation
+- dining
+- utilities
+- healthcare
+
+
+
+====================================================
+3. UAE CITY COMPARISON TOOL
+====================================================
+
+Compare:
+- Dubai
+- Abu Dhabi
+- Sharjah (under development)
+- Ajman (under development)
+- Ras Al Khaimah (under development)
+
+Compare:
+- rent
+- traffic
+- family friendliness
+- nightlife
+- savings potential
+- commute stress
+
+====================================================
+4. INTERACTIVE COST BREAKDOWN
+====================================================
+
+Dynamic sliders:
+- apartment size
+- eating outside frequency
+- kids
+- schooling
+- gym
+- car ownership
+
+Real-time updates.
+
+====================================================
+5. "HOW MUCH SHOULD I EARN?" TOOL
+====================================================
+
+User selects:
+- desired lifestyle
+- family size
+- savings goal
+
+Output:
+recommended salary.
+
+====================================================
+6. EXPAT REALITY STORIES
+====================================================
+
+Generate anonymous realistic personas:
+- bachelor IT engineer
+- nurse
+- delivery driver
+- Indian family
+- finance executive
+- remote worker
+
+Show:
+income vs expenses vs savings.
+
+
+
+
+====================================================
+SEO STRATEGY
+====================================================
+
+Generate:
+- SEO architecture
+- blog strategy
+- long-tail keywords
+- city-specific pages
+- salary-specific landing pages
+
+Examples:
+- "Is 10,000 AED enough in Dubai?"
+- "Can a family survive on 15k in Abu Dhabi?"
+- "Dubai salary calculator for Indians"
+- "How much salary needed in UAE"
+
+Create:
+- topical authority structure
+- internal linking strategy
+- schema markup strategy
+- FAQ sections
+
+====================================================
+MONETIZATION STRATEGY
+====================================================
+
+Suggest:
+1. AdSense placement strategy
+2. Affiliate opportunities:
+   - banks
+   - remittance
+   - investment brokers
+   - insurance
+   - relocation services
+3. Premium features
+4. PDF reports
+5. Newsletter strategy
+
+====================================================
+DATA STRATEGY
+====================================================
+
+Design:
+- lightweight data storage approach
+- JSON structure
+- monthly update workflow
+- optional scraping workflow
+
+Suggest:
+- legal/public datasets
+- crowd-sourced updates
+- manual admin panel ideas
+
+====================================================
+TECH STACK
+====================================================
+
+Recommend:
+- frontend framework
+- chart library
+- hosting
+- analytics
+- SEO stack
+- CMS/blog system
+
+Prioritize:
+- simplicity
+- low cost
+- performance
+- SEO
+
+====================================================
+UI/UX REQUIREMENTS
+====================================================
+
+The UI should feel:
+- modern fintech
+- minimalist
+- fast
+- highly visual
+
+Use:
+- charts
+- sliders
+- affordability gauges
+- savings simulations
+- emotional visuals
+
+====================================================
+IMPORTANT
+====================================================
+
+DO NOT overengineer.
+DO NOT build enterprise architecture.
+DO NOT assume venture funding.
+
+Build:
+- lean
+- practical
+- realistic
+- monetizable
+- SEO-focused
+- solo-founder-friendly
+
+
+
+
+
+Think deeply like:
+- indie hacker
+- SaaS founder
+- SEO expert
+- fintech UX expert
+- solo developer
+- growth marketer
+
+Optimize for:
+- usefulness
+- simplicity
+- trust
+- traffic
+- monetization
+- low operational burden
+
+
+

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Can I Afford Dubai?"
+version = "1.0.0"
+id = "artifacts/uae-salary-check"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23229
+
+[services.development]
+run = "pnpm --filter @workspace/uae-salary-check run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/uae-salary-check", "run", "build" ]
+publicDir = "artifacts/uae-salary-check/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23229"
+BASE_PATH = "/"

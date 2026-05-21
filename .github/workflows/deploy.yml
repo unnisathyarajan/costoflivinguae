@@ -37,6 +37,9 @@ jobs:
           BASE_PATH: /
           NODE_ENV: production
 
+      - name: Add 404.html for SPA routing
+        run: cp artifacts/uae-salary-check/dist/public/index.html artifacts/uae-salary-check/dist/public/404.html
+
       - name: Write CNAME
         run: echo "${{ vars.CUSTOM_DOMAIN }}" > artifacts/uae-salary-check/dist/public/CNAME
 
